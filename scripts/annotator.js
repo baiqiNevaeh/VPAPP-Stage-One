@@ -1,4 +1,12 @@
 
+const { Query, User } = AV;
+
+AV.init({
+    appId: "JJd4PkRXoUS8BndbB5KfAnuW-gzGzoHsz",
+    appKey: "DRDgC5TzqDM4CVVaQ3p9bThO",
+    serverURL: "https://jjd4pkrx.lc-cn-n1-shared.com"
+});
+
 // https://github.com/dvnc/annotator/tree/0.1.0
 var Annotation = (function Annotation() {
 
@@ -981,8 +989,37 @@ var JSonToCSV = {
 
   // Test "submit" button
 function finished(){
-    JSonToCSV.setDataConver({
-        fileName: 'test',
+    //JSonToCSV.setDataConver({
+    //    fileName: 'test',
+    //});
+
+    var savedData = JSON.parse(localStorage.getItem('annotations'));
+    // 如果要现实表头文字
+    row += "annotated technical terms" + ',' + "difficulty level";
+    CSV += row + '\r\n'; // 添加换行符号
+
+    for (var i = 0; i < savedData.length; i++) {
+        row = "";
+
+        row += savedData[i].selectedText;
+        row += ",";
+        row += savedData[i].note;
+
+        CSV += row + '\r\n'; // 添加换行符号
+
+        // console.log('annotated technical terms' + savedData[i].selectedText);
+        // console.log('difficulty level' + savedData[i].note);    
+    }
+
+    if(!CSV) return;
+    const collectedData = new AV.Object('annotated_text');
+    collectedData.set('annotated_terms_level', CSV);
+    // collectedData.set('assignmentID', );
+    collectedData.save().then((collectedData) => {
+        this.$message({
+            type: 'success',
+            message: 'completed'
+        });
     });
     localStorage.clear();
 }
