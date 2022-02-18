@@ -28,10 +28,6 @@
 		<link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/pages.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
-
-        <!--  import LeanCloud-->
-        <!-- <script src="//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js"></script> -->
-
 </head>
 
 <section class="container" id="Writing">
@@ -52,9 +48,9 @@
                                 <p>You are invited to participate in a study about user understanding towards Alexa's privacy policy.</p>
                                 
 
-                                <p>This questionnaire contains three sections.</p>
-                                <li><strong>First section: some basic questions about your background, like your age, gender, education level and whether you have the IT background.</strong></li>
-                                <li><strong>Second section: you will be asked to read an Alexa's privacy policy. Please select all technical terms from your perspective and give them a difficulty level.</strong> </li>
+                                <p>This questionnaire contains two tasks.</p>
+
+                                <li><strong>First task: you will be asked to read an Alexa's privacy policy. Please select all technical terms from your perspective and give them a difficulty level.</strong> </li>
                                     <h6 style="text-indent:35px">Difficulty level:</h6>
                                         <li style="text-indent:35px">1-You can totally understand it. /You can exactly know its meaning.</li>
                                         <li style="text-indent:35px">2-You can easily understand it based on the contexts.</li>
@@ -62,9 +58,15 @@
                                         <li style="text-indent:35px">4-You may guess its meaning based on the contexts, but you are not sure about it.</li>
                                         <li style="text-indent:35px">5-You cannot understand it.</li>
 
+
+                                    <h6 style="text-indent:35px">Tool:</h6>
+                                        <li style="text-indent:35px">Use your mouse to annotate the text to open a selection popover.</li>
+                                        <li style="text-indent:35px">Input the <strong>number</strong> of difficulty level and click "Add difficulty level" button.</li>
+                                        <li style="text-indent:35px">If you want to copy the annotated text, please click the annotated text, and you can see the "COPY" button in the popover.</li>
+                                        <li style="text-indent:35px">If you want to remove the annotated text, please also click the annotated text, and you can see the "Remove Highlight" button in the popover.</li>
                                     <br>
 
-                                <li><strong>Third section: you will be asked to answer a open quetion about the privacy policy that you read.</strong></li>
+                                <li><strong>Second task: please list all technical terms that may affect your understanding of this privacy policy.</strong></li>
                                 
                                 <h4>Hints:</h4>
                                 <ol>
@@ -225,11 +227,6 @@
             </div>
 
         </div>
-        <div style="text-align: center;">
-            <button type="submit" class="w3-btn" onclick="finished()">Submit!</button>
-            <a class="w3-btn" href="../index.html" >Link Button</a>
-        </div>
-        <br><br><br>
     </div>
 
     <script src="./scripts/jquery.min.js"></script>
@@ -239,6 +236,31 @@
     <script src="./scripts/app.js"></script>
 
 </body>
+
+<div class="container">
+    <div class="content">
+        <div class="header">
+            <h2>Please list all technical terms that may affaect your understanding of this privacy policy.</h2>
+        </div>
+
+        <div id="book">
+            <p>For example:</p>
+            <p>logs data</p>
+            <p>third-party sites</p>
+            <p>opt-out rights</p>
+
+            <textarea id="open_question" cols="30" rows="10"></textarea>
+        </div>
+
+        <div style="text-align: center;">
+            <button type="submit" class="w3-btn" onclick="finished()">Submit!</button>
+            <!-- <a class="w3-btn" href="../index.html" >Link Button</a> -->
+        </div>
+        <br><br><br>
+
+    </div>
+    
+</div>
 </html>
 
 

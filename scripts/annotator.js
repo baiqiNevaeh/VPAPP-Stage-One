@@ -1,12 +1,4 @@
 
-const { Query, User } = AV;
-
-AV.init({
-    appId: "JJd4PkRXoUS8BndbB5KfAnuW-gzGzoHsz",
-    appKey: "DRDgC5TzqDM4CVVaQ3p9bThO",
-    serverURL: "https://jjd4pkrx.lc-cn-n1-shared.com"
-});
-
 // https://github.com/dvnc/annotator/tree/0.1.0
 var Annotation = (function Annotation() {
 
@@ -916,7 +908,7 @@ var JSonToCSV = {
         var row = "", CSV = '';
 
         // 如果要现实表头文字
-        row += "annotated technical terms" + ',' + "difficulty level";
+        row += "annotated technical terms" + ',' + "difficulty level" + "," + "open question";
         CSV += row + '\r\n'; // 添加换行符号
 
         for (var i = 0; i < savedData.length; i++) {
@@ -925,6 +917,12 @@ var JSonToCSV = {
             row += savedData[i].selectedText;
             row += ",";
             row += savedData[i].note;
+
+            if (i == 0) {
+                var openQuestion = $("open_question" ).val();
+                row += ",";
+                row += openQuestion;
+            }
 
             CSV += row + '\r\n'; // 添加换行符号
 
@@ -989,74 +987,8 @@ var JSonToCSV = {
 
   // Test "submit" button
 function finished(){
-    var fso, f1, f2, s;
     JSonToCSV.setDataConver({
         fileName: 'test',
-    });
-    
-}
-
-function csvToObject(csvString){
-    var csvarry = csvString.split("\r\n");
-    var datas = [];
-    var headers = csvarry[0].split(",");
-    for(var i = 1;i<csvarry.length;i++){
-        var data = {};
-        var temp = csvarry[i].split(",");
-             for(var j = 0;j<temp.length;j++){
-                 data[headers[j]] = temp[j];
-             }
-        datas.push(data);
-    }
-     return datas;
-}
-
- function FuncCSVInport() {
-     $("#csvFileInput").val("");
-     $("#csvFileInput").click();
- }
-
- function readCSVFile(obj) {
-     var reader = new FileReader();
-     reader.readAsText(obj.files[0]);
-     reader.onload = function () {
-           var data = csvToObject(this.result);
-            console.log(data);//data为csv转换后的对象
-    }
-}
-
-function co() {
-    //JSonToCSV.setDataConver({
-    //    fileName: 'test',
-    //});
-
-    var savedData = JSON.parse(localStorage.getItem('annotations'));
-    // 如果要现实表头文字
-    row += "annotated technical terms" + ',' + "difficulty level";
-    CSV += row + '\r\n'; // 添加换行符号
-
-    for (var i = 0; i < savedData.length; i++) {
-        row = "";
-
-        row += savedData[i].selectedText;
-        row += ",";
-        row += savedData[i].note;
-
-        CSV += row + '\r\n'; // 添加换行符号
-
-        // console.log('annotated technical terms' + savedData[i].selectedText);
-        // console.log('difficulty level' + savedData[i].note);    
-    }
-
-    if(!CSV) return;
-    const collectedData = new AV.Object('annotated_text');
-    collectedData.set('annotated_terms_level', CSV);
-    // collectedData.set('assignmentID', );
-    collectedData.save().then((collectedData) => {
-        this.$message({
-            type: 'success',
-            message: 'completed'
-        });
     });
     localStorage.clear();
 }
