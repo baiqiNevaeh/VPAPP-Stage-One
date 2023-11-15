@@ -1,2 +1,2 @@
 # VPAPP-Stage-One
-This includes the questionnaire about user study.
+This includes a template for our VPA user study stage one survey.
